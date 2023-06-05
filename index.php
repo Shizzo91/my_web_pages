@@ -131,6 +131,12 @@
             "sidebar" => $sideBar,
         ]);
     });
+    $router->get('/impressum', function() use($sideBar) {
+        echo Render::render("impressum", [
+            "title" => "Impressum",
+            "sidebar" => $sideBar,
+        ]);
+    });
 
 
     
