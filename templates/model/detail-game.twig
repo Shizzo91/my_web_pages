@@ -1,0 +1,161 @@
+{% extends "main.twig" %}
+
+{% block main %}
+<div class="main-page game-page">
+    <section class="game-container">
+        <div class="game-title">
+            <h1 class="main-headline">{{ game.title }}</h1>
+        </div>
+        {% if game.description and (game.trailer or game.screenshot) %}
+            <div class="game-media-wrapper">
+                {% if game.trailer %}
+                    <iframe
+                            class="game-trailer"
+                            src="{{ game.trailer }}"
+                            title="{{ game.title }}"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen>
+
+                    </iframe>
+                {% endif %}
+                {% if game.screenshot %}
+                    <img
+                            class="game-screenshot"
+                            src="{{ game.screenshot }}"
+                            alt="{{ game.title }}">
+                {% endif %}
+            </div>
+            <div class="game-description">
+                <p>{{ game.description }}</p>
+            </div>
+        {% elseif (not game.description) and (game.trailer or game.screenshot) %}
+            <div class="game-media-wrapper full">
+                {% if game.trailer %}
+                    <iframe
+                            class="game-trailer"
+                            src="{{ game.trailer }}"
+                            title="{{ game.title }}"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen>
+
+                    </iframe>
+                {% endif %}
+                {% if game.screenshot %}
+                    <img
+                            class="game-screenshot"
+                            src="{{ game.screenshot }}"
+                            alt="{{ game.title }}">
+                {% endif %}
+            </div>
+        {% elseif game.description and not (game.trailer or game.screenshot) %}
+            <div class="game-description full">
+                <p>{{ game.description }}</p>
+            </div>
+        {% endif %}
+    </section>
+    <section class="genres">
+        <h2 class="main-headline">Genres</h2>
+        <ul class="model-list genre-list">
+            {% for genre in genres %}
+                <li>{{ genre.name }}</li>
+            {% else %}
+                <li class="genre-not-found">
+                    <em>Leider wurden keine genres gefunden</em>
+                </li>
+            {% endfor %}
+        </ul>
+    </section>
+    <section class="platforms">
+        <h2 class="main-headline">Platfromen</h2>
+        <ul class="model-list platform-list">
+            {% for platform in platforms %}
+                <li>
+                    <dl class="model-detail-list">
+                        <dt>Platform</dt>
+                        <dd>{{ platform.name }}</dd>
+                        {% if platform.systemRequirements %}
+                            <dt>Systemanforderungen</dt>
+                            <dd>{{ platform.systemRequirements }}</dd>
+                        {% endif %}
+                    </dl>
+
+                </li>
+            {% else %}
+                <li class="platform-not-found">
+                    <em>Leider wurden keine genres gefunden</em>
+                </li>
+            {% endfor %}
+        </ul>
+    </section>
+    <section class="developer-studio">
+        <h2 class="main-headline">Developer Studio</h2>
+        {% for key, value in developerStudio %}
+            {% if key != "id" and key != "contactInformationID" %}
+                <div class="developer-studio-block">
+                    {% if key == "foundationYear" %}
+                        <h3>Gründungsjahr</h3>
+                    {% else %}
+                        <h3>{{key|title}}</h3>
+                    {% endif %}
+                    <p>{{value}}</p>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </section>
+    <section class="contact-information">
+        <h2 class="main-headline">{{ developerStudio.name }}</h2>
+        <div class="contact-information-wrapper">
+            {% if contactInformation.street %}
+                <div class="contact-information-block street">
+                    <span class="key">Straße</span>
+                    <span class="value">{{ contactInformation.street }}</span>
+                </div>
+            {% endif %}
+            {% if contactInformation.zip %}
+                <div class="contact-information-block zip">
+                    <span class="key">Postleitzahl</span>
+                    <span class="value">{{ contactInformation.zip }}</span>
+                </div>
+            {% endif %}
+            {% if contactInformation.city %}
+                <div class="contact-information-block city">
+                    <span class="key">Stadt</span>
+                    <span class="value">{{ contactInformation.city }}</span>
+                </div>
+            {% endif %}
+            {% if contactInformation.country %}
+                <div class="contact-information-block country">
+                    <span class="key">Land</span>
+                    <span class="value">{{ contactInformation.country }}</span>
+                </div>
+            {% endif %}
+            {% if contactInformation.email %}
+                <div class="contact-information-block email">
+                    <span class="key">E-Mail</span>
+                    {% if contactInformation.email != "nur auf Anfrage" %}
+                        <span class="value">
+                            <a href="mail:{{ contactInformation.email }}" class="mail-link">{{ contactInformation.email }}</a>
+                        </span>
+                    {% else %}
+                        <span class="value">{{ contactInformation.email }}</span>
+                    {% endif %}
+                </div>
+            {% endif %}
+            {% if contactInformation.phone %}
+                <div class="contact-information-block phone">
+                    <span class="key">Telefonnummer</span>
+                    {% if contactInformation.phone != "nur auf Anfrage" %}
+                        <span class="value">
+                            <a href="tel:{{ contactInformation.phone }}" class="mail-link">{{ contactInformation.phone }}</a>
+                        </span>
+                    {% else %}
+                        <span class="value">{{ contactInformation.phone }}</span>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+    </section>
+</div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "main.twig" %}
+
+{% block main %}
+<div class="main-page">
+    <ul class="model-list">
+        {% for model in models %}
+        <li class="model-list-item">
+            <a class="model-list-link" href="{{__URL_PREFIX__}}{{type|lower}}/{{model.id}}">{{model.name}}</a>
+        </li>
+        {% else %}
+        <li class="model-list-item model-not-found">
+            <em>Leider wurde nichts gefunden</em>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

@@ -1,0 +1,172 @@
+.game-page {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 0.25rem;
+    grid-template-areas:
+            "game game game game"
+            "genres genres genres genres"
+            "platforms platforms platforms platforms"
+            "developer-studio developer-studio developer-studio developer-studio"
+            "contact-information contact-information contact-information contact-information";
+}
+
+.game-trailer {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+}
+
+.game-title {
+    grid-area: title;
+}
+
+.game-media-wrapper {
+    grid-area: media;
+    display: flex;
+    flex-direction: column;
+}
+
+.game-description {
+    grid-area: description;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-description.full,
+.game-media-wrapper.full {
+    grid-column: 4 span;
+}
+
+.game-container {
+    display: grid;
+    grid-area: game;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 0.25rem;
+    grid-template-areas:
+            "title title title title"
+            "media media media media"
+            "media media media media"
+            "description description description description";
+}
+
+.genres {
+    grid-area: genres;
+}
+
+.platforms {
+    grid-area: platforms;
+}
+
+.developer-studio {
+    grid-area: developer-studio;
+}
+
+.contact-information {
+    grid-area: contact-information;
+}
+.model-detail-list dt,
+.model-detail-list dd {
+    padding: 0;
+    margin: 0;
+}
+.model-detail-list {
+    border: black dotted 0.125rem;
+    padding: 0.125rem;
+}
+
+.contact-information {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact-information-wrapper {
+    width: inherit;
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+        "street email"
+        "zip email"
+        "city phone"
+        "country phone"
+}
+
+.contact-information-block .key::after {
+    content: ":";
+}
+
+.contact-information-block.street {
+    grid-area: street;
+}
+
+.contact-information-block.email {
+    grid-area: email;
+}
+
+.contact-information-block.zip {
+    grid-area: zip;
+}
+
+.contact-information-block.city {
+    grid-area: city;
+}
+
+.contact-information-block.country {
+    grid-area: country;
+}
+
+.contact-information-block.phone {
+    grid-area: phone;
+}
+
+.mail-link,
+.phone-link {
+    text-decoration: underline;
+}
+/* Small only */
+@media screen and (max-width: 39.9375em) {}
+
+/* Medium and up */
+@media screen and (min-width: 40em) {
+    .game-container {
+        grid-template-areas:
+            "title title title title"
+            "media media description description"
+            "media media description description"
+            "media media description description";
+    }
+
+    .game-page {
+        grid-template-areas:
+            "game game game game"
+            "genres genres platforms platforms"
+            "genres genres platforms platforms"
+            "developer-studio developer-studio developer-studio developer-studio"
+            "contact-information contact-information contact-information contact-information";
+    }
+}
+
+/* Medium only */
+@media screen and (min-width: 40em) and (max-width: 63.9375em) {}
+
+/* Large and up */
+@media screen and (min-width: 64em) {
+    .game-media-wrapper.full {
+        flex-direction: row;
+    }
+
+    .game-media-wrapper.full .game-trailer,
+    .game-media-wrapper.full .game-screenshot {
+        min-width: 50%;
+    }
+
+    .contact-information-wrapper {
+        width: clamp(40rem, 30rem + 5vw, 50%);
+    }
+}
+
+/* Large only */
+@media screen and (min-width: 64em) and (max-width: 74.9375em) {}

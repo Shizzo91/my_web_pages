@@ -1,0 +1,94 @@
+{% extends "main.twig" %}
+
+{% block main %}
+<form action="" method="post">
+    <div class="border-wrapper">
+        <h2 class="headline">Allgemeines</h2>
+        <div class="grid-x">
+            <div class="cell small-12 medium-6">
+                <label for="game-title">Spiel title</label>
+            </div>
+            <div class="cell small-12 medium-6">
+                <input name="gameTitle" type="text" id="game-title" placeholder="Game Title" required>
+            </div>
+        </div>
+        <div class="grid-x">
+            <div class="cell small-12 medium-6">
+                <label for="developStudio">Entwickler Studio</label>
+            </div>
+            <div class="cell small-12 medium-6">
+                <select name="developStudio" id="developStudio" required>
+                    <option value="">Bitte Auswählen</option>
+                    {% for developStudio in developStudios %}
+                    <option value="{{developStudio.id}}">
+                        {{developStudio.getName()}}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="grid-x">
+            <div class="cell small-12 medium-6">
+                <label for="game-description">Spiel Beschreibung</label>
+            </div>
+            <div class="cell small-12 medium-6">
+                <textarea name="gameDescription" id="game-description" cols="30" rows="10"></textarea required>
+            </div>
+        </div>
+        <div class="grid-x">
+            <div class="cell small-12 medium-6">
+                <label for="screenshot">Screenshot</label>
+            </div>
+            <div class="cell small-12 medium-6">
+                <input name="screenshot" type="file" id="screenshot" placeholder="screenshot">
+            </div>
+        </div>
+        <div class="grid-x">
+            <div class="cell small-12 medium-6">
+                <label for="trailer">Trailer</label>
+            </div>
+            <div class="cell small-12 medium-6">
+                <input name="trailer" type="text" id="trailer" placeholder="Trailer">
+            </div>
+        </div>
+    </div>
+    <div class="border-wrapper">
+        <h2 class="headline">Genres</h2>
+        <div class="grid-x">
+            {% for genre in genres %}
+            <div class="cell small-12 medium-4 large-3">
+                <div class="grid-x">
+                    <div class="cell small-4"><input type="checkbox" name="genres[]" id="genre-{{genre.id}}"
+                            value="{{genre.id}}">
+                    </div>
+                    <div class="cell small-8"><label for="genre-{{genre.id}}">{{genre.getName()}}</label></div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="border-wrapper">
+        <h2 class="headline">Platformen</h2>
+        <div class="grid-x">
+            {% for index, platform in platforms %}
+            <div class="cell small-12">
+                <div class="grid-x">
+                    <div class="cell small-1"><input type="checkbox" name="platfroms[{{index}}][id]"
+                            id="platform-{{platform.id}}" value="{{platform.id}}"></div>
+                    <div class="cell small-4"><label for="platform-{{genre.id}}">{{platform.getName()}}</label></div>
+                    <div class="cell small-2">Systemanforderung:</div>
+                    <div class="cell small-4"><textarea name="platfroms[{{index}}][requierements]" id="" cols="30"
+                            rows="10"></textarea>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    </div>
+    </div>
+    <div class="grid-x grid-padding-x">
+        <div class="cell center-submit">
+            <input class="" type="submit" value="Absenden">
+        </div>
+    </div>
+</form>
+{% endblock %}

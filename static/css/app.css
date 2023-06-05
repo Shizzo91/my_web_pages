@@ -1,0 +1,72 @@
+body {
+    background: rgb(140, 140, 140);
+    background: radial-gradient(circle at 80%, rgba(140, 140, 140, 1) 12%, rgba(160, 160, 160, 1) 26%, rgba(180, 180, 180, 1) 50%, rgba(200, 200, 200, 1) 69%);
+}
+
+a {
+    color: black;
+}
+
+a:hover {
+    color: gray;
+}
+
+.model-list {
+    list-style-type: none;
+}
+
+.top-bar a {
+    text-decoration: none;
+    border-top-color: black;
+}
+
+.model-list-link {
+    text-decoration: none;
+}
+
+.model-list-item {}
+
+.main-headline {
+    width: 100%;
+    text-align: center;
+}
+
+.border-wrapper {
+    border: black 0.125rem solid;
+    padding: 0.25rem;
+    margin: 0.25rem;
+}
+
+.border-wrapper .headline {
+    text-align: center;
+}
+
+.center-submit {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+}
+
+.model-detail-list {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    grid-gap: 0.5rem;
+}
+.main-page {
+    padding-inline: clamp(0.125rem, 0.0125rem + 0.25vw ,1.25rem);
+}
+
+/* Small only */
+@media screen and (max-width: 39.9375em) {}
+
+/* Medium and up */
+@media screen and (min-width: 40em) {}
+
+/* Medium only */
+@media screen and (min-width: 40em) and (max-width: 63.9375em) {}
+
+/* Large and up */
+@media screen and (min-width: 64em) {}
+
+/* Large only */
+@media screen and (min-width: 64em) and (max-width: 74.9375em) {}

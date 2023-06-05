@@ -1,0 +1,14 @@
+{% extends "main.twig" %}
+
+{% block main %}
+<div class="main-page">
+    <dl class="model-detail-list">
+        {% for key, value in model %}
+            {% if key != "id" %}
+                <dt>{{key|title}} :</dt>
+                <dd>{{value}}</dd>
+            {% endif %}
+        {% endfor %}
+    </dl>
+</div>
+{% endblock %}

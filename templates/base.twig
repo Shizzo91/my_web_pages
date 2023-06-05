@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title|default("index")}}</title>
+    <link rel="stylesheet" href="{{__CSS__}}/foundation.min.css">
+    <link rel="stylesheet" href="{{__CSS__}}/app.css">
+    {% for css in csses %}
+        <link rel="stylesheet" href="{{__CSS__}}/{{css}}">
+    {% endfor %}
+</head>
+
+<body>
+    {% block body %}
+    {% endblock %}
+    {% for script in scripts %}
+        <script src="{{__JS__}}/{{script}}"></script>
+    {% endfor %}
+    <!-- Compressed JavaScript -->
+    <script src="{{__JS__}}/jquery.js"></script>
+    <script src="{{__JS__}}/what-input.js"></script>
+    <script src="{{__JS__}}/foundation.min.js"></script>
+    <script>$(document).foundation();</script>
+</body>
+
+</html>

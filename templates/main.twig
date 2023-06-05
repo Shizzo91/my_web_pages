@@ -1,0 +1,42 @@
+{% extends "base.twig" %}
+{% block body %}
+{% block sidebar %}
+<div class="title-bar" data-responsive-toggle="example-animated-menu" data-hide-for="medium">
+    <button class="menu-icon" type="button" data-toggle></button>
+    <div class="title-bar-title">Menu</div>
+</div>
+<div class="top-bar" id="example-animated-menu" data-animate="hinge-in-from-top spin-out">
+    <div class="top-bar-left">
+        <ul class="dropdown menu" data-dropdown-menu>
+            <li class="menu">
+                <a href="{{__URL_PREFIX__}}">Games</a>
+            </li>
+            {% for key, sidebarItems in sidebar %}
+            <li>
+                <a href="#">{{ key|split("-")|join(" ")|capitalize }}</a>
+                <ul class="menu vertical">
+                    <li>
+                        <a href="{{__URL_PREFIX__}}{{ key|lower }}/A/Z">
+                            Alle
+                        </a>
+                    </li>
+                    {% for sidebarItem in sidebarItems %}
+                    <li>
+                        <a href="{{__URL_PREFIX__}}{{ key|lower }}/{{sidebarItem|join('/')}}">
+                            {{sidebarItem|join(" - ")}}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}
+{% block main %}
+<div class="main-page">
+    <pre>{{test|default("")}}</pre>
+</div>
+{% endblock %}
+{% endblock %}
