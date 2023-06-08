@@ -1,0 +1,45 @@
+version: "1.0.0"
+services:
+  db:
+    image: mysql
+    container_name: joel-db2
+    networks:
+      - &network compose-network
+    ports:
+      - 7071:3306
+    volumes:
+      - ./Games.sql:/docker-entrypoint-initdb.d/schema.sql:ro
+    environment:
+      - "MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}"
+      - "MYSQL_DATABASE=${APP_USER}"
+      - "MYSQL_USER=${APP_USER}"
+      - "MYSQL_PASSWORD=${APP_PASSWORD}"
+  pma:
+    image: phpmyadmin
+    container_name: joel-pma2
+    ports:
+      - 7081:80
+    networks:
+      - *network
+    environment:
+      - "PMA_USER=root"
+      - "PMA_PASSWORD=${DB_ROOT_PASSWORD}"
+      - "PMA_HOST=db"
+    depends_on:
+      - db
+  web:
+    build: .
+    container_name: joel-web2
+    volumes:
+      - ./:/var/www/html
+    links:
+      - db
+    ports:
+      - 9080:80
+    networks:
+      - *network
+    depends_on:
+      - db
+networks:
+  *network :
+    driver: bridge

@@ -11,7 +11,7 @@ class Render
 {
     const BASE_NAME = Config::URL_PREFIX;
     const TEMPLATE_DIR = self::BASE_NAME."templates/";
-    const STATIC_DIR = self::BASE_NAME."static/";
+    const STATIC_DIR = self::BASE_NAME."/static/";
     // const STATIC_DIR = "/static/";
     const IMAGE_DIR = self::STATIC_DIR."img/";
     const JS_DIR = self::STATIC_DIR."js";

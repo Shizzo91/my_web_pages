@@ -7,11 +7,11 @@ use PDO;
 class Config
 {
     public const DB_NAME = "Games";
-    public const DB_USER = "Games";
-    public const DB_PASSWORD = "ojzHT8Bl9R.q85V4";
-    public const DB_HOST = "localhost";
+    public const DB_USER = "root";
+    public const DB_PASSWORD = "password123";
+    public const DB_HOST = "db";
     public const DB_PORT = 3306;
-    public const URL_PREFIX = "/www/";
+    public const URL_PREFIX = "";
 
     public static function getPDO(string $typeOfConnection = "mysql"): PDO
     {
