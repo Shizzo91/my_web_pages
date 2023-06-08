@@ -8,12 +8,6 @@ use Stringable;
 
 class Response implements Stringable
 {
-
-    /**
-     * @var bool
-     */
-    public static bool $compress = true;
-
     /**
      * @param string $content
      * @param int $statusCode
@@ -70,7 +64,7 @@ class Response implements Stringable
      */
     public function getMinifiedContent(): string
     {
-        return self::HTML_MINIFY($this->content);
+        return Render::HTML_MINIFY($this->content);
     }
 
     /**
@@ -79,9 +73,6 @@ class Response implements Stringable
      */
     public function __toString(): string
     {
-        if (self::$compress) {
-            $this->addHeader("Content-Encoding", "gzip");
-        }
         foreach ($this->headers as $key => $value) {
             if (is_array($value)) {
                 $value = implode(", ", $value);
@@ -90,9 +81,6 @@ class Response implements Stringable
         }
 
         http_response_code($this->statusCode);
-
-        return (self::$compress)
-            ? gzcompress($this->getMinifiedContent())
-            : $this->getMinifiedContent();
+        return  $this->getMinifiedContent();
     }
 }

@@ -13,15 +13,14 @@
     $genre = $entity->make("genre");
     $sideBar = (new SideBar(5))->getArray();
 
-    function errorResponse(): Response
+    function errorResponse(): void
     {
         $response = Render::renderResponse("error/index", [
             "title" => "Page not Found",
         ]);
         $response->setStatusCode(404);
-        return $response;
+        echo $response;
     }
-
 
     function getModel(?string $type): Model
     {
@@ -41,12 +40,9 @@
         }
             
     }
-    
-
 
      // create composer instances
     $router = new Router();
-
 
     $router->get('/add', function() use ($sideBar, $entity) {
         $game = $entity->make("game");
@@ -109,28 +105,13 @@
         ]);
     });
 
-    $router->get('/data', function() use ($genre, $entity) {
-        echo "<pre>".json_encode($genre->all(), JSON_PRETTY_PRINT)."</pre>";
-    });
-
-    $router->get('/data2', function() use ($genre, $entity) {
-        echo "<pre>";
-        echo "</pre>";
-        $data = $genre->all()[0];
-        foreach ($data AS $key => $value) {
-            echo $key;
-            echo "<br>";
-            echo $value;
-            echo "<br>";
-        }
-    });
-
     $router->get('/', function() use($sideBar) {
         echo Render::render("main", [
             "title" => "Main Page",
             "sidebar" => $sideBar,
         ]);
     });
+
     $router->get('/impressum', function() use($sideBar) {
         echo Render::render("impressum", [
             "title" => "Impressum",
@@ -138,8 +119,6 @@
         ]);
     });
 
-
-    
     $router->mount(
         '/(games|genres|platforms|developer-studios)', 
         function() use($sideBar, $router) {
@@ -200,5 +179,4 @@
 
     // führt das routing nach registrierung der seiten aus
     $router->run();
-    // echo Render::render("test/index");
 ?>

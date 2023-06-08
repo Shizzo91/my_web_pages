@@ -10,9 +10,8 @@ $baseName = dirname(__FILE__);
 class Render
 {
     const BASE_NAME = Config::URL_PREFIX;
-    const TEMPLATE_DIR = self::BASE_NAME."templates/";
-    const STATIC_DIR = self::BASE_NAME."/static/";
-    // const STATIC_DIR = "/static/";
+    const TEMPLATE_DIR = "templates/";
+    const STATIC_DIR = "/static/";
     const IMAGE_DIR = self::STATIC_DIR."img/";
     const JS_DIR = self::STATIC_DIR."js";
     const CSS_DIR = self::STATIC_DIR."css";
@@ -45,6 +44,12 @@ class Render
             $buffer
         );
     }
+
+    /**
+     * creating a render environment
+     * @param FilesystemLoader $loader
+     * @return Environment
+     */
     private static function getEnvironment(FilesystemLoader $loader): Environment
     {
         $twig = new Environment($loader, [
@@ -57,6 +62,15 @@ class Render
         return $twig;
     }
 
+    /**
+     * render a template
+     * @param string $tmplPath
+     * @param array $kwags
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
     public static function render(string $tmplPath, array $kwags = []): string
     {
         if (!str_ends_with($tmplPath, ".twig")) {
@@ -77,6 +91,15 @@ class Render
     }
 
 
+    /**
+     * render a response
+     * @param string $tmplPath
+     * @param array $kwags
+     * @return Response
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
     public static function renderResponse(
         string $tmplPath, 
         array $kwags = []

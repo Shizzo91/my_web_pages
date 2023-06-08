@@ -11,7 +11,7 @@ class Config
     public const DB_PASSWORD = "password123";
     public const DB_HOST = "db";
     public const DB_PORT = 3306;
-    public const URL_PREFIX = "";
+    public const URL_PREFIX = "/";
 
     public static function getPDO(string $typeOfConnection = "mysql"): PDO
     {
