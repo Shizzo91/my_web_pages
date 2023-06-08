@@ -2,7 +2,7 @@ version: "1.0.0"
 services:
   db:
     image: mysql
-    container_name: joel-db2
+    container_name: joel-db
     networks:
       - &network compose-network
     ports:
@@ -16,7 +16,7 @@ services:
       - "MYSQL_PASSWORD=${APP_PASSWORD}"
   pma:
     image: phpmyadmin
-    container_name: joel-pma2
+    container_name: joel-pma
     ports:
       - 7081:80
     networks:
@@ -29,7 +29,7 @@ services:
       - db
   web:
     build: .
-    container_name: joel-web2
+    container_name: joel-web
     volumes:
       - ./:/var/www/html
     links:
